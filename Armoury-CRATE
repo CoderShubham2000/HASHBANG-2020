@@ -1,0 +1,58 @@
+The Continental is a chain of hotels located all around the world that function as a neutral territory for members of the criminal underworld. They are frequented by many hitmen and notorious murderers.
+
+The Continental in New York City is owned by Winston, a friend of John Wick and a ruthless enforcer of the hotel’s rules. The reception is operated by a concierge named Charon. The Continental’s concierge can provide for almost any needs of their exclusive clientele.
+
+Charon is also responsible for handling the Armory Lounge, which is like a storeroom consisting of several wardrobes, where arms and ammunition of the visitors kept during their stay in The Continental. But recently there has been a surge in the number of visitors to The Continental after John Wick was declared as ‘excommunicado’. So, The Continental plans to renovate the Armory Lounge to accommodate more number of wardrobes for more number of visitors. Since Charon is in in-charge of the Armory Lounge, he has been given the responsibility for the renovation. For the renovation much more space has been allocated and the old Crate will also be built with a new design. For each visitor, a single wardrobe is allocated during their time of stay.
+
+For the renovation, Winston has been provided with a list containing the arrival time and the duration of stay of each visitor of the Continental. Your job is to help Winston find the minimum number of wardrobes to be built for the accommodation of arms and ammunition so that none of the visitors’ belongings are left out. Remember, only one wardrobe allocation per visitor can be done.
+
+Input:
+First line will contain T, number of testcases. Then the testcases follow.
+The first line of each test contains N, denoting the number of visitors.
+The second line of each test case contains N space separated integers, denoting the arrival time of each visitor.
+The third line of each test case contains N space separated integers denoting the duration of stay of each visitor.
+Output:
+For each test case, print in a new line the minimum number of wardrobes to be built in the Armory Crate of The Continental.
+
+Constraints
+1≤T≤5
+1≤N≤105
+1≤Arrival−time≤109
+1≤duration−of−stay≤109
+Sample Input:
+2
+3
+1 2 3
+3 3 3
+5
+1 2 3 4 5
+2 3 4 5 6
+Sample Output:
+30
+3
+
+Unable to View Problem Statement Correctly?
+Visit Link for the problem statement: https://www.codechef.com/problems/HB820TAC
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Note: The solution is in Python
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+t=int(input())
+while(t!=0):
+    n = int(input())
+    ar_time = list(map(int,input().split()))
+    stay_time = list(map(int,input().split()))
+    maximum = max([sum(i) for i in zip(ar_time,stay_time)])
+    time = [0]*maximum
+    for j in zip(ar_time,stay_time):
+        time[j[0]-1]+=1
+        time[j[0]+j[1]-1]-=1
+    sumi=0
+    maxi=0
+    for k in time:
+        sumi += k
+        if(sumi >= maxi):
+            maxi = sumi
+    print(maxi)
+    t-=1
