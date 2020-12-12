@@ -27,6 +27,10 @@ Sample Output:
 6
 EXPLANATION:
 All possible substrings are: "1","R","R","1R","RR" and "1RR" So, the checksum is : 1 + 1 + 1 + 2 + 0 + 1 = 6
+
+Unable to View Problem Statement Correctly?
+Visit Link for the problem statement: https://www.codechef.com/problems/HB820CHS
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Note: The solution is in Python
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
