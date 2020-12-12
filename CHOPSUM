@@ -1,0 +1,50 @@
+Question:
+
+Super Weird Tech Company recently lost a big amount of revenue due to several incidents of business documents and message getting tampered.
+One of the most effective ways to detect these types of tampering is checksum.
+As an employee of Super Weird Tech Company, you have the responsibility of developing a checksum algorithm which is reasonably fast.
+At first, you thought of counting all of the unique characters in the string.
+But, this technique has a scary flaw. Someone can still manipulate the non-repeating characters and the checksum will not be changed.
+Hence, the modification will be unnoticed.
+To fix this problem, you chopped the message in each and every possible way possible and accumulated the number of non-repeating letters.
+Now, this accumulated result is the desired checksum. In this way, even a slight tampering in any portion of the message can be detected.
+
+Now, you need to develop a solution to calculate the checksum in a reasonable time. As the result can be huge, it should be checksum modulo 109+7 to prevent overflowing issues.
+
+Input:
+First line will contain T, number of testcases. Then the testcases follow.
+Each testcase contains of a single line of input, the message string.
+Output:
+For each testcase, output in a single line answer given by Checksum of message modulo 1000000007.
+
+Constraints
+0≤Message.length≤104
+Message only has ASCII-128 printable characters
+Sample Input:
+1
+1RR
+Sample Output:
+6
+EXPLANATION:
+All possible substrings are: "1","R","R","1R","RR" and "1RR" So, the checksum is : 1 + 1 + 1 + 2 + 0 + 1 = 6
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Note: The solution is in Python
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+import collections
+ 
+def checksum(S):
+  index = collections.defaultdict(list)
+  for i, c in enumerate(S):
+      index[c].append(i)
+ 
+  ans = 0
+  for A in index.values():
+      A = [-1] + A + [len(S)]
+      for i in range(1, len(A) - 1):
+          ans += ((A[i] - A[i-1]) * (A[i+1] - A[i]))
+  return (ans % (10**9 + 7))
+ 
+if __name__ == '__main__':
+  x = int(input().strip())
+  for i in range(x):
+    print(checksum(input().strip()))
