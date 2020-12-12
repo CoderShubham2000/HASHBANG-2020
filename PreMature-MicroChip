@@ -1,0 +1,81 @@
+Anish has a knack of making exciting electronics things in his free time. His dream is to make his own microprocessor. He works immensely hard to fulfill his dream. At this point of time his microchip is very much premature and can only do three bit-wise operations.
+
+Left Shift
+Right Shift
+XOR
+But, he has managed to work with numbers of arbitrary bit length as long as the representation is of unsigned integer. Now, being very premature, his processor is very very slow. His friend Vinita has given him 2 unsigned integers.
+
+A, consisting of N bits with an arbitrary initial value.
+F, consisting of N bits with the initial value of 2K - 1.
+Vinita also constrained Anish with two operations.
+
+Anish can only perform a left/right shift operation on F. Providing, there are exactly K numbers of ‘1’ bits in F.
+He also can perform A xor F operation to modify the value of A.
+In this situation, Vinita has challenged Anish to generate the maximum number A can contain only using these 2 operations. Though Anish's microchip is very efficient in doing left and right shifts, it’s behavior is very funky when it comes to XOR operations. To impress Vinita, Anish has to minimize the XOR operations.
+
+Now, your task has to determine what is the minimum required XOR operation needed to fulfill the challenge if possible. Or, say it’s IMPOSSIBLE.
+
+Input:
+First line will contain T, number of testcases. Then the testcases follow.
+For each test case, each line will contain the binary representation of A and, the value of K.
+Output:
+Each line will contain the result for each test case. The output will either be IMPOSSIBLE if the desired outcome can't be achieved. Or, an integer denoting minimum number of operations required.
+
+Constraints
+1≤T≤100
+2≤K≤lengthofA
+2≤lengthofA≤1000
+Sample Input:
+2
+00010110 3
+01010 4
+Sample Output:
+3
+IMPOSSIBLE
+EXPLANATION:
+In case 1, the binary representation of A is 00010110. And, the binary representation of F is 00000111. Then, the following steps are followed :
+
+F left shift 5 : new F = 11100000
+A xor F : new A = 11110110
+F right shift 5 : new F = 00000111
+A xor F : new A = 11110001
+F left shift 1 : new F = 00001110
+A xor F : new A = 11111111
+So, the output is 3.
+
+In case 2, we can't achieve the target of maximizing A using available operations. So, the output is IMPOSSIBLE.
+
+Unable to View Problem Statement Correctly?
+Visit Link for the problem statement: https://www.codechef.com/problems/HB820PMC
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Note: The solution is in Python
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+import sys
+ 
+ 
+def solve(line):
+    x = [p == '1' for p in line.split()[0]]
+    k = int(line.split()[1])
+ 
+    flips = 0
+    i = 0
+    while i < (len(x) - k + 1):
+        if not x[i]:
+            for j in range(i,i + k):
+                x[j] = not x[j]
+            flips += 1
+        i += 1
+ 
+    if all(x):
+        return flips
+    return 'IMPOSSIBLE'
+ 
+ 
+ 
+if __name__ == '__main__':
+      cases = int(input().strip())
+      for i in range(cases):
+          line = input().strip()
+          print(solve(line))
