@@ -1,0 +1,57 @@
+For a set of natural numbers ranging from 1toN, your job is to find the magic number for this set. Let this set of numbers be denoted by A.
+
+Note: A−>[1,2,3,......,N−1,N]
+Now let’s take a look at what does this magic number stand for? ---- Two integers are provided to you, namely N and X. N is the largest number of the set. X is a prime number. For each number in the set A, you need to figure out the largest divisor of that number, and this divisor must not be divisible by X. The magic number for the set A is the sum of all such divisors for the numbers of the set. Write a program to figure out the magic number for a set A, with N and X being provided.
+
+Input:
+First line will contain T, number of testcases. Then the testcases follow.
+Each test case consists of one line containing two space separated integers N and X.
+Output:
+The output must contain the magic number for each test case on a different line.
+
+Constraints
+1≤T≤300000
+1≤N≤109
+2≤X≤109
+Sample Input:
+4
+10 3
+10 2
+10 5
+1000000000 97
+Sample Output:
+41
+36
+43
+494897959532893312
+EXPLANATION:
+In the first test case, for 1 to 10 the divisors are [1,2,1,4,5,2,7,8,1,10], and thus the magic number is 41.
+
+In the third test case, for 1 to 10 the divisors are [1,2,3,4,1,6,7,8,9,2], and thus the magic number is 43.
+
+Unable to View Problem Statement Correctly?
+Visit Link for the problem statement: https://www.codechef.com/problems/HB820TMN
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Note: The solution is in Python
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+def fun(n, k):
+  S = 0
+  S = (n * (n+1)) // 2
+  k_pow = k
+  while k_pow <= n:
+    up = n // k_pow
+    S = S - (k - 1) * (up * (up + 1)) // 2
+    k_pow *= k
+  return S
+ 
+
+t = int(input())
+while t:
+    n, k = list(map(int,input().split()))
+    
+    ans = fun(n,k)
+    print(ans)
+    t-=1
+
+
